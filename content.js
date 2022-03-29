@@ -52,7 +52,7 @@ function dp() {
 }
 
 function dpList(){
-    let list = document.getElementsByClassName('s-main-slot')[0].children;
+    const list = document.getElementsByClassName('s-main-slot')[0].children;
     let dataUUID;  
 
     const widget = document.body.querySelector('[cel_widget_id="UPPER-RESULT_INFO_BAR-0"]');
@@ -73,7 +73,7 @@ function dpList(){
         dataUUID = list[i].getAttribute('data-uuid');
         console.log( 'dataUUID: ' + dataUUID);
 
-        let dataComponentType = list[i].getAttribute('data-component-type');
+        const dataComponentType = list[i].getAttribute('data-component-type');
         if(!dataComponentType || dataComponentType !== 's-search-result'){
             // 結果セット以外の場合は無視
             console.log('結果セット以外');
@@ -83,8 +83,8 @@ function dpList(){
         
 
         // 対象外の文字列を検索
-        let text = list[i].innerText;
-        let regexp = /スポンサー|Kindle|ペーパーバッグ|単行本|Prime|ペーパーバック|ハードカバー|Kindle版 (電子書籍)|ウェア&シューズ/
+        const text = list[i].innerText;
+        const regexp = /スポンサー|Kindle|ペーパーバッグ|単行本|Prime|ペーパーバック|ハードカバー|Kindle版 (電子書籍)|ウェア&シューズ/
         if(regexp.test(text)){
             // 表示しない
             list[i].setAttribute('style', 'display:none;');
