@@ -8,7 +8,7 @@ function dp() {
             break;
         }
     }
-
+    
     // FBA販売者が居るか
     const mbc = document.getElementById('mbc');
     let isFBAseller = false;
@@ -26,6 +26,9 @@ function dp() {
     const text = '販売元: ' + sellerName + ' / '
         + 'Seller数: ' + sellersNum + ' / '
         + 'FBA Seller: ' + (isFBAseller ? '存在' : 'なし');
+
+    // 表示
+    // const text = headerText(sellerName, sellersNum, isFBAseller);
 
     // 期待値高
     const isPromising = (sellerName !== 'Amazon.co.jp' && sellersNum > 1 && isFBAseller);
@@ -50,6 +53,8 @@ function dp() {
     console.log(text);
     // window.alert(text);
 }
+
+
 
 function dpList(){
     const list = document.getElementsByClassName('s-main-slot')[0].children;
@@ -84,13 +89,42 @@ function dpList(){
 
         // 対象外の文字列を検索
         const text = list[i].innerText;
-        const regexp = /スポンサー|Kindle|ペーパーバッグ|単行本|Prime|ペーパーバック|ハードカバー|Kindle版 (電子書籍)|ウェア&シューズ/
+        const regexp = /MP3|アプリ|スポンサー|Kindle|ペーパーバッグ|単行本|Prime|ペーパーバック|ハードカバー|Kindle版 (電子書籍)|ウェア&シューズ/
         if(regexp.test(text)){
             // 表示しない
             list[i].setAttribute('style', 'display:none;');
             console.log('表示しない');
         }
     }
+}
+
+function headerText (sellerName, sellersNum, isFBAseller){
+    if(sellerName === 'Amazon.co.jp'){
+        sellerName = invalidHeaderValue(sellerName);
+    }
+
+    if(sellersNum === 1){
+        sellersNum = invalidHeaderValue(sellersNum);
+    }
+
+    if(!isFBAseller){
+        fbaSeller = invalidHeaderValue('なし');
+    }else{
+        fbaSeller = invalidHeaderValue('あり');
+    }
+
+    return '販売元: ' + sellerName + ' / '
+         + 'Seller数: ' + sellersNum + ' / '
+         + 'FBA Seller: ' + fbaSeller;
+}
+
+function invalidHeaderValue(text){
+    //  red / bold
+    const element = document.createElement('span');
+    element.setAttribute('style', 'color:red; font-weight:bold');
+    const textNode = document.createTextNode(text);
+    element.appendChild(textNode);
+    return element;
 }
 
 // ページ変更時
