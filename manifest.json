@@ -1,0 +1,14 @@
+{
+    "name": "FBA Checker",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "FBA!FBA!",
+    "content_scripts": [
+      {
+        "matches": ["https://www.amazon.co.jp/*/dp/*", "https://www.amazon.co.jp/dp/*", "https://www.amazon.co.jp/s?*"],
+        "js": ["content.js"]
+      }
+    ],
+    "permissions":["tabs"]
+
+  }
